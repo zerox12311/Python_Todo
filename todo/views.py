@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Todo
 
-from .forms import TodoModelForm
+from .forms import TodoModelForm, DeleteConfirmForm
 
 # Create your views here.
 def index(request):
@@ -33,6 +33,8 @@ def edit(request, pk):
     })
 
 def delete(request, pk):
-    todo = get_object_or_404(Todo,pk=pk)
-    todo.delete()
-    return redirect('todo:index')
+    # todo = get_object_or_404(Todo,pk=pk)
+    # todo.delete()
+    # return redirect('todo:index')
+    form = DeleteConfirmForm(request.POST or None)
+    return render(request,'todo/delete.html', {'form': form})

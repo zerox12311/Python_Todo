@@ -1,24 +1,16 @@
-{% extends 'layout.html' %}
+{% extends 'layout.html' %} {% load bootstrap4 %} {% block body%}
+<div class="row">
+    <div class="col">
+        <br>
+        <br>
+        <br> {{todo.title}}
+        <br> {{todo.content}}
+        <br>
+        <a class="btn btn-primary" href="{% url 'todo:index' %}">Back</a>
+        <a class="btn btn-success" href="{% url 'todo:edit' todo.id%}">Edit</a>
+        <a class="btn btn-danger" href="{% url 'todo:delete' todo.id%}">Delete</a>
 
-{% load bootstrap4 %}
 
-{% block body%}
-    <div class="row">
-        <div class="col">
-                <br>
-                <br>
-                <br>
-                {{todo.title}}
-                <br>
-                {{todo.content}}
-                <br>
-                <a class="btn btn-primary" href="{% url 'todo:index' %}">Back</a>
-                <a class="btn btn-success" href="{% url 'todo:edit' todo.id%}">Edit</a>
-                <a class="btn btn-danger" href="{% url 'todo:delete' todo.id%}">Delete</a>
-                
-                
-        </div>
     </div>
+</div>
 {% endblock %}
-
-
