@@ -37,4 +37,8 @@ def delete(request, pk):
     # todo.delete()
     # return redirect('todo:index')
     form = DeleteConfirmForm(request.POST or None)
+    if form.is_valid() and form.cleaned_data['check']:
+        todo = get_object_or_404(Todo,pk=pk)
+        todo.delete()
+        return redirect('todo:index')
     return render(request,'todo/delete.html', {'form': form})
