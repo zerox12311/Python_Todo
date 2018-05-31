@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Todo
 
 from .forms import TodoModelForm, DeleteConfirmForm
@@ -8,6 +9,7 @@ def index(request):
     todos = Todo.objects.all()
     return render(request, 'todo/index.html', {'todos': todos})
 
+@login_required
 def new(request):
     form = TodoModelForm(request.POST or None)
     if form.is_valid():
@@ -17,11 +19,13 @@ def new(request):
         'form':form
     })
 
+@login_required
 def show(request, pk):
     # post = Post.objects.get(pk = pk)
     todo = get_object_or_404(Todo,pk=pk)
     return render(request,'todo/show.html',{'todo':todo})
 
+@login_required
 def edit(request, pk):
     todo = get_object_or_404(Todo,pk=pk)
     form = TodoModelForm(request.POST or None,instance=todo)
@@ -32,6 +36,7 @@ def edit(request, pk):
         'form':form
     })
 
+@login_required
 def delete(request, pk):
     # todo = get_object_or_404(Todo,pk=pk)
     # todo.delete()
