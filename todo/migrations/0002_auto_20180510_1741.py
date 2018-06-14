@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='tag',
             name='title',
-            field=models.CharField(max_length=255, unique=True),
+            field=models.CharField(max_length=255),
         ),
     ]
